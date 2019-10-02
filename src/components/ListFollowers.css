@@ -1,0 +1,45 @@
+.content-modal{
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    max-width: 500px;
+    width: 400px;
+    text-align: center;
+}
+
+.content-modal ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-modal ul li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px; 
+}
+
+.content-modal ul li label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-modal ul li label img{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-right: 10px;
+}
+
+.content-modal ul li .btn-follow{
+    width: auto;
+    border-radius: 5px;
+    padding: 5px 8px;
+    background-color: #3897f0;
+    border: none;
+    color: white;
+}

@@ -6,6 +6,7 @@ import "./Profile.css";
 
 //Components
 import Header from "../components/Header";
+import ListFollowers from "../components/ListFollowers";
 
 import api from "../services/api";
 
@@ -13,6 +14,16 @@ export default function Profile({ match }) {
   const { id } = match.params;
   const [user, setUser] = useState([]);
   const [post, setPost] = useState([]);
+  const [follower, setFollower] = useState(0);
+  const [modal, setModal] = useState(true);
+
+  useEffect(() => {
+    async function loadFollower() {
+      const { data } = await api.get("/followers");
+      setFollower(data.quant);
+    }
+    loadFollower();
+  }, [id]);
 
   useEffect(() => {
     async function loadUser() {
@@ -26,49 +37,68 @@ export default function Profile({ match }) {
     async function loadPost() {
       const { data } = await api.get(`/post-list/${id}`);
       setPost(data.post);
-      debugger;
     }
     loadPost();
   }, [id]);
+
+  function changeModal() {
+    modal === false ? setModal(true) : setModal(false);
+  }
+
   return (
     <>
       <Header id={id} />
+      {modal === true ? (
+        <div className="modal">
+          <button onClick={changeModal}>X</button>
+          <ListFollowers />
+        </div>
+      ) : (
+        <></>
+      )}
+
       <main>
         <section className="header-profile">
           <article className="content-profile">
-            {/* {Colocar imagem de perfil} */}
-            <img
-              src="https://cdn.shopify.com/s/files/1/0088/3579/3001/files/biro-square_360x.png?v=1558875856"
-              alt="Nome do Usuário"
-            />
+            <img src={user.avatar} alt="avatar" />
           </article>
           <article className="profile-infos">
             <h2>{user.user}</h2>
             <ul>
               <li>
-                <b>0</b> publicações
+                <b>{post.length}</b> publicações
               </li>
               <li>
-                <b>10000</b> seguidores
+                <b>{user.following}</b> seguidores
               </li>
               <li>
-                <b>10</b> seguindo
+                <button onClick={changeModal}>
+                  <b>{follower}</b> seguindo
+                </button>
               </li>
             </ul>
-            <p>{user.description}</p>
+            <p>{user.bio}</p>
           </article>
         </section>
         <section className="posts">
           <div>Publicações</div>
-          <ul>
-            {post.map((image, index) => (
-              <li key={index}>
-                <Link to="">
-                  <img src={image.image} alt="Profile infos" />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {post.length > 0 ? (
+            <ul>
+              {post.map((image, index) => (
+                <li key={index}>
+                  <Link to="">
+                    <img src={image.image} alt="Profile infos" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="empty">
+              :(
+              <br />
+              Não há nenhuma publicação
+            </div>
+          )}
         </section>
       </main>
     </>

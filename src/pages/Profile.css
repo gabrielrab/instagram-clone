@@ -34,11 +34,19 @@ main .header-profile .profile-infos h2{
 main .header-profile .profile-infos ul{
     list-style: none;
     display: flex;
+    align-items: center;
 }
 
 main .header-profile .profile-infos ul li{
     font-size: 18px;
     margin: 10px;
+}
+
+main .header-profile .profile-infos ul li button{
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    padding: 0; 
 }
 
 main .header-profile .profile-infos p{
@@ -70,4 +78,32 @@ main .posts ul li img{
     width: 300px;
 }
 
+.empty{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.modal{
+    background-color:rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center
+}
+
+.modal button{
+    padding: 4px;
+    font-size: 12px;
+    background:white;
+    font-weight: 700;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}

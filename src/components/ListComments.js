@@ -15,6 +15,7 @@ export default function ListComment(props) {
   useEffect(() => {
     async function loadComments() {
       const response = await api.get(`/post/${post}`);
+
       setComment(response.data.post.comments);
     }
     loadComments();

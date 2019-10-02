@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 //Css
 import "./Feed.css";
 
@@ -13,59 +13,66 @@ import like from "../assets/like.svg";
 import comment from "../assets/comment.svg";
 import send from "../assets/send.svg";
 
+import api from "../services/api";
+
 export default function Feed({ match }) {
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    async function loadPost() {
+      const response = await api.get(`/post`);
+
+      setPost(response.data.post);
+      debugger;
+    }
+    loadPost();
+  }, []);
+
   return (
     <>
       {/* Colocar match.id */}
-      <Header id="5d92c2c28928b10f0ecf9057" />
+      <Header id="5d94ae40190a2a0649d07ed9" />
       <section id="post-list">
-        <article>
-          <header>
-            <div className="user-info">
-              <div className="profile-image">
-                <img
-                  src="https://cdn.shopify.com/s/files/1/0088/3579/3001/files/biro-square_360x.png?v=1558875856"
-                  alt="Foto de Perfil"
-                />
+        {post.map((posts, index) => (
+          <article key={posts._id}>
+            <header>
+              <div className="user-info">
+                <div className="profile-image">
+                  <img src={posts.author.avatar} alt="Foto de Perfil" />
+                </div>
+                <div>
+                  <span>
+                    <b>{posts.author.user}</b>
+                  </span>
+                  <br />
+                  <span className="place">{posts.place}</span>
+                </div>
               </div>
-              <div>
-                <span>
-                  <b>gabrielrab</b>
-                </span>
-                <br />
-                <span className="place">Codeby</span>
+
+              <img src={more} alt="Mais" />
+            </header>
+
+            <img src={posts.image} alt="Imagem Postada" />
+
+            <footer>
+              <div className="actions">
+                <button type="button">
+                  <img src={like} alt="" />
+                </button>
+                <img src={comment} alt="" />
+                <img src={send} alt="" />
               </div>
-            </div>
 
-            <img src={more} alt="Mais" />
-          </header>
+              <strong>{posts.likes} curtidas</strong>
 
-          <img
-            src="https://cdn.shopify.com/s/files/1/0088/3579/3001/files/biro-square_360x.png?v=1558875856"
-            alt="Imagem Postada"
-          />
-
-          <footer>
-            <div className="actions">
-              <button type="button">
-                <img src={like} alt="" />
-              </button>
-              <img src={comment} alt="" />
-              <img src={send} alt="" />
-            </div>
-
-            <strong>2 curtidas</strong>
-
-            <p>
-              <strong>username</strong> Olá mundo Codeby
-            </p>
-            <ListComments post="5d936888a699d619204e7416" />
-            <Comment
-              post="5d936888a699d619204e7416"
-              user="5d92c2c28928b10f0ecf9057"
-            />
-          </footer>
-        </article>
+              <p>
+                <strong>{posts.author.user}</strong> {posts.description}
+              </p>
+              <ListComments post={posts._id} />
+              <Comment post={posts._id} user="5d92c2c28928b10f0ecf9057" />
+            </footer>
+          </article>
+        ))}
       </section>
     </>
   );
