@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../services/contex";
+
 import { Link } from "react-router-dom";
 import "./Header.css";
 
@@ -6,8 +8,8 @@ import logo from "../assets/logo.svg";
 import camera from "../assets/camera.svg";
 import profile from "../assets/user.svg";
 
-export default function Header(props) {
-  const { id } = props;
+export default function Header() {
+  const { id } = useContext(AuthContext);
   return (
     <header id="main-header">
       <div className="header-content">

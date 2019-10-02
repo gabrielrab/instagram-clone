@@ -18,8 +18,12 @@ import send from "../assets/send.svg";
 
 import api from "../services/api";
 
+//Context
+import { AuthContext } from "../services/contex";
+
 export default function Feed({ match }) {
   const { id } = match.params;
+
   const [post, setPost] = useState([]);
   const [acc, setAcc] = useState(null);
 
@@ -33,16 +37,17 @@ export default function Feed({ match }) {
   }, []);
 
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    const socket = io("https://codeby-backend.herokuapp.com");
     socket.on("post", newPost => {
       setAcc(newPost);
       debugger;
     });
   }, [acc]);
-
   return (
     <>
-      <Header id={id} />
+      <AuthContext.Provider value={{ id }}>
+        <Header />
+      </AuthContext.Provider>
       <section id="post-list">
         {acc && (
           <article key={acc.post._id}>
