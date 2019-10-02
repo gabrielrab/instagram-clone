@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Comment.css";
 
+import api from "../services/api";
+
 export default function Comment(props) {
   const { post, user } = props;
   const [comment, setComment] = useState("");
@@ -13,6 +15,18 @@ export default function Comment(props) {
 
   async function sendComment(event) {
     event.preventDefault();
+    try {
+      const response = await api
+        .post(`/comment/${post}/${user}`, { comment: comment })
+        .then(res => {
+          //
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
 
     setComment("");
   }

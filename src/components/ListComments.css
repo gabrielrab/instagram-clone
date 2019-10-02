@@ -1,0 +1,13 @@
+.content-comments{
+    width: 100%;
+    margin-top: 6px;
+    opacity: 0.8;
+}
+
+.content-comments ul{
+    list-style: none;
+}
+
+.content-comments ul li{
+    font-size: 14px;
+}

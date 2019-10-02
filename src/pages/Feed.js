@@ -5,6 +5,7 @@ import "./Feed.css";
 //Components
 import Header from "../components/Header";
 import Comment from "../components/Comment";
+import ListComments from "../components/ListComments";
 
 //Images
 import more from "../assets/more.svg";
@@ -12,10 +13,11 @@ import like from "../assets/like.svg";
 import comment from "../assets/comment.svg";
 import send from "../assets/send.svg";
 
-export default function Feed() {
+export default function Feed({ match }) {
   return (
     <>
-      <Header />
+      {/* Colocar match.id */}
+      <Header id="5d92c2c28928b10f0ecf9057" />
       <section id="post-list">
         <article>
           <header>
@@ -57,7 +59,11 @@ export default function Feed() {
             <p>
               <strong>username</strong> Olá mundo Codeby
             </p>
-            <Comment post="2" user="3" />
+            <ListComments post="5d936888a699d619204e7416" />
+            <Comment
+              post="5d936888a699d619204e7416"
+              user="5d92c2c28928b10f0ecf9057"
+            />
           </footer>
         </article>
       </section>

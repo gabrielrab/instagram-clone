@@ -14,6 +14,7 @@
 .comment-box button {
     color: #3897f0;
     font-weight: 800;
+    background: none;
     font-size: 12px;
     border: none;
     opacity: 0.4;

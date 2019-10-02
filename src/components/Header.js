@@ -6,15 +6,16 @@ import logo from "../assets/logo.svg";
 import camera from "../assets/camera.svg";
 import profile from "../assets/user.svg";
 
-export default function Header() {
+export default function Header(props) {
+  const { id } = props;
   return (
     <header id="main-header">
       <div className="header-content">
-        <Link to="/">
+        <Link to="/feed">
           <img src={logo} alt="Instagram" />
         </Link>
         <div>
-          <Link to="/new">
+          <Link to={`/new/${id}`}>
             <img src={camera} alt="Enviar Publicação" />
           </Link>
           <>
