@@ -11,7 +11,7 @@ export default function Header(props) {
   return (
     <header id="main-header">
       <div className="header-content">
-        <Link to="/feed">
+        <Link to="/">
           <img src={logo} alt="Instagram" />
         </Link>
         <div>

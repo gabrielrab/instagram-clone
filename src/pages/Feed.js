@@ -16,6 +16,7 @@ import send from "../assets/send.svg";
 import api from "../services/api";
 
 export default function Feed({ match }) {
+  const { id } = match.params;
   const [post, setPost] = useState([]);
 
   useEffect(() => {
@@ -30,8 +31,7 @@ export default function Feed({ match }) {
 
   return (
     <>
-      {/* Colocar match.id */}
-      <Header id="5d94ae40190a2a0649d07ed9" />
+      <Header id={id} />
       <section id="post-list">
         {post.map((posts, index) => (
           <article key={posts._id}>
@@ -69,7 +69,7 @@ export default function Feed({ match }) {
                 <strong>{posts.author.user}</strong> {posts.description}
               </p>
               <ListComments post={posts._id} />
-              <Comment post={posts._id} user="5d94ae40190a2a0649d07ed9" />
+              <Comment post={posts._id} user={id} />
             </footer>
           </article>
         ))}
