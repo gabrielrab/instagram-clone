@@ -19,7 +19,7 @@ export default function Header(props) {
             <img src={camera} alt="Enviar Publicação" />
           </Link>
           <>
-            <Link to="/profile">
+            <Link to={`/profile/${id}`}>
               <img src={profile} alt="Enviar Publicação" className="icon" />
             </Link>
           </>
