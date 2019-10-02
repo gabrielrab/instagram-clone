@@ -21,7 +21,7 @@ export default function Comment(props) {
         comment: comment
       });
       if (response.status === 200) {
-        const socket = io("http://localhost:3000");
+        const socket = io("https://codeby-backend.herokuapp.com");
         socket.emit("comentario", response.data);
       }
     } catch (error) {

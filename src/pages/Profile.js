@@ -15,7 +15,7 @@ export default function Profile({ match }) {
   const [user, setUser] = useState([]);
   const [post, setPost] = useState([]);
   const [follower, setFollower] = useState(0);
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     async function loadFollower() {

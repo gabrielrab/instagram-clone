@@ -8,12 +8,12 @@ import logo from "../assets/logo.svg";
 import camera from "../assets/camera.svg";
 import profile from "../assets/user.svg";
 
-export default function Header() {
-  const { id } = useContext(AuthContext);
+export default function Header(props) {
+  const { id } = props;
   return (
     <header id="main-header">
       <div className="header-content">
-        <Link to="/">
+        <Link to={`/`}>
           <img src={logo} alt="Instagram" />
         </Link>
         <div>

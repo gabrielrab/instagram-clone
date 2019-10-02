@@ -83,3 +83,8 @@ section#post-list {
     color: #7159c1;
     display: block;
   }
+  a{
+    color: black;
+    text-decoration: none;
+
+  }

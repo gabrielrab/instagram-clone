@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import io from "socket.io-client";
 
@@ -40,13 +41,12 @@ export default function Feed({ match }) {
     const socket = io("https://codeby-backend.herokuapp.com");
     socket.on("post", newPost => {
       setAcc(newPost);
-      debugger;
     });
   }, [acc]);
   return (
     <>
-      <AuthContext.Provider value={{ id }}>
-        <Header />
+      <AuthContext.Provider value={{ id: id }}>
+        <Header id={id} />
       </AuthContext.Provider>
       <section id="post-list">
         {acc && (
@@ -58,7 +58,11 @@ export default function Feed({ match }) {
                 </div>
                 <div>
                   <span>
-                    <b>{acc.user.user}</b>
+                    <b>
+                      <Link to={`/profile/${acc.user._id}`}>
+                        {acc.user.user}
+                      </Link>
+                    </b>
                   </span>
                   <br />
                   <span className="place">{acc.post.place}</span>
@@ -98,7 +102,9 @@ export default function Feed({ match }) {
                 </div>
                 <div>
                   <span>
-                    <b>{posts.author.user}</b>
+                    <Link to={`/profile/${posts.author._id}`}>
+                      <b>{posts.author.user}</b>
+                    </Link>
                   </span>
                   <br />
                   <span className="place">{posts.place}</span>
