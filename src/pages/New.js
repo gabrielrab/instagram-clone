@@ -41,7 +41,7 @@ export default function New({ history, match }) {
         })
         .then(res => {
           setProgress("Enviado com sucesso!");
-          history.push("/feed");
+          history.push(`/feed/${id}`);
         });
     } catch (error) {
       console.log(error);

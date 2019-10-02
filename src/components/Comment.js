@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import io from "socket.io-client";
 import "./Comment.css";
 
 import api from "../services/api";
@@ -16,14 +17,13 @@ export default function Comment(props) {
   async function sendComment(event) {
     event.preventDefault();
     try {
-      const response = await api
-        .post(`/comment/${post}/${user}`, { comment: comment })
-        .then(res => {
-          //
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      const response = await api.post(`/comment/${post}/${user}`, {
+        comment: comment
+      });
+      if (response.status === 200) {
+        const socket = io("http://localhost:3000");
+        socket.emit("comentario", response.data);
+      }
     } catch (error) {
       console.log(error);
     }

@@ -9,8 +9,7 @@ import "./ListComments.css";
 export default function ListComment(props) {
   const { post } = props;
   const [comment, setComment] = useState([]);
-
-  registerSocket();
+  const [add, setAdd] = useState(null);
 
   useEffect(() => {
     async function loadComments() {
@@ -21,12 +20,13 @@ export default function ListComment(props) {
     loadComments();
   }, []);
 
-  function registerSocket() {
-    //mudar para heroku
-    const socket = io("http://localhost:3000");
+  useEffect(() => {
+    const socket = io("https://codeby-backend.herokuapp.com");
+    socket.on("comentario", newPost => {
+      setAdd(newPost);
+    });
+  }, [add]);
 
-    //socket.on("comentario", alert("novo comentario"));
-  }
   return (
     <div className="content-comments">
       <ul>
@@ -35,6 +35,11 @@ export default function ListComment(props) {
             <strong>{comments.author.user}</strong> {comments.comentario}
           </li>
         ))}
+        {add && (
+          <li key={add._id}>
+            <strong>{add.author}</strong> {add.comment}
+          </li>
+        )}
       </ul>
     </div>
   );
