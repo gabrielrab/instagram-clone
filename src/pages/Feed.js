@@ -69,7 +69,7 @@ export default function Feed({ match }) {
                 <strong>{posts.author.user}</strong> {posts.description}
               </p>
               <ListComments post={posts._id} />
-              <Comment post={posts._id} user="5d92c2c28928b10f0ecf9057" />
+              <Comment post={posts._id} user="5d94ae40190a2a0649d07ed9" />
             </footer>
           </article>
         ))}
